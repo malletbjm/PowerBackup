@@ -7,13 +7,21 @@ If you are going to be backing up or restoring from a network location, you must
 Creating a backup using PowerBackup
 -----------------------------------
 Move the "PowerBackup.zip" file to the users current computer, and extract
+
 Double click on the "PowerBackup" shortcut in the newly created folder
+
 Click "Create backup"
+
 Ensure all items you would like to be backed up are selected
+
 If you would like to add more items to be backed up click "Add Registry Key", "Add file", or "Add folder", and select the item you would like to add to the backup
+
 Ensure all items you would like to be backed up are selected
+
 Click "Start backup"
+
 Once complete you should see a popup which says "Backup complete"
+
 
 Restoring from a backup using PowerBackup
 -----------------------------------

@@ -1,7 +1,7 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 Add-Type -AssemblyName PresentationCore,PresentationFramework
-
+Add-Type -AssemblyName Microsoft.VisualBasic
 function MainMenu {
     $form = New-Object System.Windows.Forms.Form
     $form.ShowIcon = $False
@@ -180,7 +180,8 @@ function CreateBackupMenu {
         $AddFileButton.Enabled = $False
         $AddFolderButton.Enabled = $False
         $AddRegistryKeyButton.Enabled = $False
-
+        
+        #Backup files specified
         try {
             Backup $LocationsListbox.CheckedItems $registryKeysListbox.CheckedItems ([ref]$ProgressBar) $DestinationTextbox.Text
 
@@ -208,6 +209,7 @@ function CreateBackupMenu {
     $ProgressBar.Visible = $True
     $form.Controls.Add($ProgressBar)
 
+    #Read config file for default parameters
     $ConfigFile = ReadConfigFile
     $BackupLocations = $ConfigFile[0]
     $BackupDestination = $ConfigFile[1]
@@ -253,6 +255,7 @@ function CreateRestoreMenu() {
     $ChooseLocationButton.Size = New-Object System.Drawing.Size(125,25)
     $ChooseLocationButton.Text = 'Select backup folder'
     $ChooseLocationButton.Add_Click({
+        #Allow user to select backup folder, if valid then enable restore button
         $LocationTextbox.Text = GetFolder
         if (($null -ne $LocationTextbox.Text) -and ($LocationTextbox.Text -ne "")) {
             $StartRestoreButton.Enabled = $True
@@ -268,8 +271,7 @@ function CreateRestoreMenu() {
     $StartRestoreButton.Add_Click({
         $StartRestoreButton.Enabled = $False
         $ChooseLocationButton.Enabled = $False
-
-        Add-Type -AssemblyName Microsoft.VisualBasic
+        #Restore files from backup
         try {
             Restore $LocationTextbox.Text
             #[System.Windows.MessageBox]::Show('Restore complete')
@@ -299,10 +301,12 @@ function CreateRestoreMenu() {
     $form.ShowDialog()
 }
 
+#Resolves powershell shorthand from config file into true filepaths
 function ResolveString($String) {
     return $ExecutionContext.InvokeCommand.ExpandString($String)
 }
 
+#Folder browser dialog
 function GetFolder() {
     $Folder = ''
     $FolderBrowser = New-Object System.Windows.Forms.FolderBrowserDialog
@@ -317,6 +321,7 @@ function GetFolder() {
     return $Folder
 }
 
+#File browser dialog
 function GetFile() {
     $File = ''
     $FileBrowser = New-Object System.Windows.Forms.OpenFileDialog
@@ -328,6 +333,7 @@ function GetFile() {
     return $File
 }
 
+#Parse config file to load program defaults
 function ReadConfigFile() {
     $mode = ""
     $BackupLocations = @()
@@ -364,6 +370,7 @@ function ReadConfigFile() {
     Return @($BackupLocations, $BackupDestination, $BackupRegistryKeys)
 }
 
+#Backup items selected in backup menu
 function Backup($BackupItems, $registryKeys, [ref]$ProgressBar, $BackupDestination) {
 
     $BackupItemsProgress = @()

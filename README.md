@@ -1,2 +1,2 @@
 # PowerBackup
-A lightweight, end-user friendly backup tool.
+A lightweight, customizable, end-user friendly backup tool.

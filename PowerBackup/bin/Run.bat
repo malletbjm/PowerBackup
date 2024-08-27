@@ -1,0 +1,1 @@
+@echo off & PowerShell.exe -Command "& '.\PowerBackup.ps1'"

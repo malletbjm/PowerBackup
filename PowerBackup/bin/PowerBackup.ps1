@@ -1,7 +1,10 @@
+#Build 2024.08.27
+
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 Add-Type -AssemblyName PresentationCore,PresentationFramework
 Add-Type -AssemblyName Microsoft.VisualBasic
+
 function MainMenu {
     $form = New-Object System.Windows.Forms.Form
     $form.ShowIcon = $False

@@ -3,7 +3,8 @@ A lightweight, customizable, end-user friendly backup tool.
 
 PowerBackup was designed with the intended use being to create a backup of a user's files in preparation for moving them to a new device.
 
-Before you get started:
+Before you get started
+-----------------------------------
 If you are going to be backing up or restoring from a network location, you must maintain a consistent connection to that network location.
 
 Creating a backup using PowerBackup

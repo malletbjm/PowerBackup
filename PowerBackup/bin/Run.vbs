@@ -1,3 +1,7 @@
 Set WshShell = CreateObject("WScript.Shell")
-WshShell.Run chr(34) & "C:\Users\bmallet\OneDrive - Enercon Services, Inc\Powershells\Backup Tools\PowerBackup\bin\Run.bat" & Chr(34), 0 
+Set fso = CreateObject("Scripting.FileSystemObject")
+vbpath = fso.GetParentFolderName(WScript.ScriptFullName)
+suffix = "\Run.bat"
+fspec = fso.BuildPath(vbpath, suffix)
+WshShell.Run chr(34) & fspec & Chr(34), 0 
 Set WshShell = Nothing
